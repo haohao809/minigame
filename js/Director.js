@@ -14,5 +14,6 @@ export class Director{
 	run() {
 		const backgroudSprite = this.dataStore.get('background');
 		backgroudSprite.draw();
+		this.dataStore.get('land').draw();
 	}
 }
