@@ -1,4 +1,5 @@
 import {Sprite} from "../base/Sprite.js"
+import {Director} from "../Director.js"
 export class Land extends Sprite{
 	constructor() {
 		const image = Sprite.getImage('land');
@@ -10,11 +11,14 @@ export class Land extends Sprite{
 		this.landX = 0;
 		//地板的移动速度
 		
-		this.landSpeed = 2;
+		this.landSpeed = Director.getInstance().moveSpeed;
 	}
 
 	draw() {
 		this.landX = this.landX + this.landSpeed;
+		if(this.landX > (this.img.width - window.innerWidth)){
+			this.landX = 0;
+		}
 		super.draw(this.img,
 			this.srcX,
 			this.srcY,
