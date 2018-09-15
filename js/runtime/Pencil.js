@@ -12,6 +12,11 @@ export class Pencil extends Sprite{
 
 	draw() {
 		this.x = this.x - Director.getInstance().moveSpeed;
+		// console.log(this.x);
+		// if(this.x === 0){
+		// 	this.x = window.innerWidth - Director.getInstance().moveSpeed;
+		// 	// debugger;
+		// }
 		super.draw(this.img,
 			0,0,
 			this.img.width,this.img.height,
