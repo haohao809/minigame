@@ -48,15 +48,24 @@ export class Birds extends Sprite{
 
 		this.index = Math.floor(this.count);
 
+		const g = 0.98;
 
+		const offsetY = (g * this.time * this.time) / 2;
+
+		for(let i = 0; i <= 2; i++) {
+			this.birdsY[i] = this.y[i] + offsetY;
+			// console.log(this.birdsY[i]);
+		}
+
+		this.time++;
 		super.draw(this.img,
 			this.clippingX[this.index],
 			this.clippingY[this.index],
 			this.clippingWidth[this.index],
 			this.clippingHeight[this.index],
-			this.birdsX[this.index],
+			this.birdX,
 			this.birdsY[this.index],
-			this.birdsWidth[this.index],
-			this.birdsHeight[this.index])
+			this.birdWidth,
+			this.birdHeight)
 	}
 }
