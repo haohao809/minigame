@@ -2,6 +2,7 @@ import {ResourceLoader} from './js/base/ResourceLoader.js';
 import {BackGround} from './js/runtime/BackGround.js';
 import {DataStore} from './js/base/DataStore.js';
 import {Land} from "./js/runtime/Land.js";
+import {Birds} from "./js/player/Birds.js";
 import {Director} from './js/Director.js'
 export class Main{
 	constructor() {
@@ -26,9 +27,12 @@ export class Main{
 	}
 
 	init() {
+		this.director.isGameOver = false;
+
 		this.dataStore
 			.put('pencils',[])
 			.put('background', BackGround)
+			.put('birds',Birds)
 			.put('land',Land);
 		// console.log(Director);
 		console.log(this.dataStore);
