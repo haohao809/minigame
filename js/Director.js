@@ -1,7 +1,8 @@
 import { DataStore } from './base/DataStore.js';
 import { UpPencil } from './runtime/UpPencil.js';
 import { DownPencil } from './runtime/DownPencil.js';
-import { Birds } from './player/Birds.js'
+import { Birds } from './player/Birds.js';
+import { StartButton } from './player/StartButton.js';
 export class Director {
     constructor() {
         console.log('构造器初始化');
@@ -98,6 +99,9 @@ export class Director {
             });
             this.dataStore.put('timer', timer)
         } else {
+        	console.log(this.dataStore.get('startButton'))
+        	console.log(StartButton)
+        	this.dataStore.get('startButton').draw();
             cancelAnimationFrame(this.dataStore.get('timer'));
             this.dataStore.destroy();
         }

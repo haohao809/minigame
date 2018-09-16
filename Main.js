@@ -3,6 +3,7 @@ import {BackGround} from './js/runtime/BackGround.js';
 import {DataStore} from './js/base/DataStore.js';
 import {Land} from "./js/runtime/Land.js";
 import {Birds} from "./js/player/Birds.js";
+import {StartButton} from "./js/player/StartButton.js";
 import {Director} from './js/Director.js'
 export class Main{
 	constructor() {
@@ -33,6 +34,7 @@ export class Main{
 			.put('pencils',[])
 			.put('background', BackGround)
 			.put('birds',Birds)
+			.put('startButton',StartButton)
 			.put('land',Land);
 		// console.log(Director);
 		this.registerEvent();
