@@ -25,11 +25,49 @@ export class Director {
     birdsEvent(){
     	for(let i = 0; i <= 2; i++){
     		this.dataStore.get('birds').y[i] = this.dataStore.get('birds').birdsY[i]
-    		console.log(this.dataStore.get('birds').birdsY[i])
+    		// console.log(this.dataStore.get('birds').birdsY[i])
     	}
     	this.dataStore.get('birds').time = 0;
     }
+    //检查是否撞击地板和铅笔 
+    check(){
+    	const land = this.dataStore.get('land');
+    	const birds = this.dataStore.get('birds');
+    	const pencils = this.dataStore.get('pencils');
+    	if(birds.birdsY[0] + birds.birdsHeight[0] >= land.y){
+    		this.isGameOver = true;
+    		console.log('游戏结束')
+    		return
+    	}
+    	const birdsBorder = {
+    		top: birds.y[0],
+    		bottom: birds.birdsY[0] + birds.birdsHeight[0],
+    		left: birds.birdsX[0],
+    		right: birds.birdsX[0] + birds.birdsWidth[0]
+    	}
+    	// console.log(pencils);
+    	pencils.forEach((item) =>  {
+
+    		const pencilBorder = {
+    			top : item.y,
+    			bottom : item.y + item.height,
+    			left: item.x,
+    			right: item.x + item.width
+    		}
+
+	    	if(birdsBorder.top > pencilBorder.bottom || birdsBorder.bottom < pencilBorder.top || birdsBorder.left > pencilBorder.right || birdsBorder.right < pencilBorder.left){
+
+	    				
+	    	}else{
+  				this.isGameOver = true;
+	    		console.log('游戏结束')
+
+	    	}    		
+    	})
+
+    }
     run() {
+    	this.check();
     	if(!this.isGameOver){
 	        const backgroudSprite = this.dataStore.get('background');
 	        backgroudSprite.draw();
@@ -61,7 +99,7 @@ export class Director {
 	        this.dataStore.put('timer', timer)
     	}else{
     		cancelAnimationFrame(this.dataStore.get('timer'));
-    		this.dataStore.destory();
+    		this.dataStore.destroy();
     	}
     }
 }
