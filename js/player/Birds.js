@@ -48,13 +48,17 @@ export class Birds extends Sprite{
 
 		this.index = Math.floor(this.count);
 
-		const g = 0.98;
+		const g = 0.98 / 2.4;
 
-		const offsetY = (g * this.time * this.time) / 2;
+		const offsetUp = 30;
+		//模拟重力加速度
+		const offsetY = (g * this.time * (this.time - offsetUp)) / 2;
 
 		for(let i = 0; i <= 2; i++) {
 			this.birdsY[i] = this.y[i] + offsetY;
 			// console.log(this.birdsY[i]);
+			// console.log(offsetY);
+			// console.log(this.time);
 		}
 
 		this.time++;

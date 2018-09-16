@@ -35,8 +35,21 @@ export class Main{
 			.put('birds',Birds)
 			.put('land',Land);
 		// console.log(Director);
+		this.registerEvent();
 		console.log(this.dataStore);
 		this.director.createPencil()
 		this.director.run();
+	}
+	registerEvent(){
+		this.canvas.addEventListener('touchstart', e => {
+			e.preventDefault();
+			console.log(this);
+			if(this.director.isGameOver){
+				this.init();
+			}else{
+				this.director.birdsEvent();
+			}
+
+		})
 	}
 }
