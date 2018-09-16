@@ -1,7 +1,7 @@
 import { DataStore } from './base/DataStore.js';
 import { UpPencil } from './runtime/UpPencil.js';
 import { DownPencil } from './runtime/DownPencil.js';
-import {Birds} from './player/Birds.js'
+import { Birds } from './player/Birds.js'
 export class Director {
     constructor() {
         console.log('构造器初始化');
@@ -22,84 +22,84 @@ export class Director {
         this.dataStore.get('pencils').push(new UpPencil(top));
         this.dataStore.get('pencils').push(new DownPencil(top));
     }
-    birdsEvent(){
-    	for(let i = 0; i <= 2; i++){
-    		this.dataStore.get('birds').y[i] = this.dataStore.get('birds').birdsY[i]
-    		// console.log(this.dataStore.get('birds').birdsY[i])
-    	}
-    	this.dataStore.get('birds').time = 0;
+    birdsEvent() {
+        for (let i = 0; i <= 2; i++) {
+            this.dataStore.get('birds').y[i] = this.dataStore.get('birds').birdsY[i]
+            // console.log(this.dataStore.get('birds').birdsY[i])
+        }
+        this.dataStore.get('birds').time = 0;
     }
     //检查是否撞击地板和铅笔 
-    check(){
-    	const land = this.dataStore.get('land');
-    	const birds = this.dataStore.get('birds');
-    	const pencils = this.dataStore.get('pencils');
-    	if(birds.birdsY[0] + birds.birdsHeight[0] >= land.y){
-    		this.isGameOver = true;
-    		console.log('游戏结束')
-    		return
-    	}
-    	const birdsBorder = {
-    		top: birds.y[0],
-    		bottom: birds.birdsY[0] + birds.birdsHeight[0],
-    		left: birds.birdsX[0],
-    		right: birds.birdsX[0] + birds.birdsWidth[0]
-    	}
-    	// console.log(pencils);
-    	pencils.forEach((item) =>  {
+    check() {
+        const land = this.dataStore.get('land');
+        const birds = this.dataStore.get('birds');
+        const pencils = this.dataStore.get('pencils');
+        if (birds.birdsY[0] + birds.birdsHeight[0] >= land.y) {
+            this.isGameOver = true;
+            console.log('游戏结束')
+            return
+        }
+        const birdsBorder = {
+            top: birds.y[0],
+            bottom: birds.birdsY[0] + birds.birdsHeight[0],
+            left: birds.birdsX[0],
+            right: birds.birdsX[0] + birds.birdsWidth[0]
+        }
+        // console.log(pencils);
+        pencils.forEach((item) => {
 
-    		const pencilBorder = {
-    			top : item.y,
-    			bottom : item.y + item.height,
-    			left: item.x,
-    			right: item.x + item.width
-    		}
+            const pencilBorder = {
+                top: item.y,
+                bottom: item.y + item.height,
+                left: item.x,
+                right: item.x + item.width
+            }
 
-	    	if(birdsBorder.top > pencilBorder.bottom || birdsBorder.bottom < pencilBorder.top || birdsBorder.left > pencilBorder.right || birdsBorder.right < pencilBorder.left){
+            if (birdsBorder.top > pencilBorder.bottom || birdsBorder.bottom < pencilBorder.top || birdsBorder.left > pencilBorder.right || birdsBorder.right < pencilBorder.left) {
 
-	    				
-	    	}else{
-  				this.isGameOver = true;
-	    		console.log('游戏结束')
 
-	    	}    		
-    	})
+            } else {
+                this.isGameOver = true;
+                console.log('游戏结束')
+
+            }
+        })
 
     }
     run() {
-    	this.check();
-    	if(!this.isGameOver){
-	        const backgroudSprite = this.dataStore.get('background');
-	        backgroudSprite.draw();
+        this.check();
+        if (!this.isGameOver) {
+            const backgroudSprite = this.dataStore.get('background');
+            backgroudSprite.draw();
 
-	        const pencils = this.dataStore.get('pencils');
-	        // console.log(pencils);
-	         
-	        if(pencils[0].x + pencils[0].width <=0 && pencils.length === 4) {
+            const pencils = this.dataStore.get('pencils');
+            // console.log(pencils);
 
-	        	pencils.shift();
-	        	pencils.shift();
-	        } 
-	        
-	        if(pencils[0].x <= (window.innerWidth - pencils[0].width) /2 && pencils.length === 2) {
-	        	// console.log(pencils[0].x);
-	        	// console.log(window.innerWidth);
-	        	this.createPencil();
-	        }
+            if (pencils[0].x + pencils[0].width <= 0 && pencils.length === 4) {
 
-	        this.dataStore.get('pencils').forEach(function(value, index, array) {
-	            value.draw();
-	        })
-	        this.dataStore.get('land').draw();
-	        this.dataStore.get('birds').draw();
+                pencils.shift();
+                pencils.shift();
+            }
 
-	        let timer = requestAnimationFrame(() => {
-	            this.run()
-	        });
-	        this.dataStore.put('timer', timer)
-    	}else{
-    		cancelAnimationFrame(this.dataStore.get('timer'));
-    		this.dataStore.destroy();
-    	}
+            if (pencils[0].x <= (window.innerWidth - pencils[0].width) / 2 && pencils.length === 2) {
+                // console.log(pencils[0].x);
+                // console.log(window.innerWidth);
+                this.createPencil();
+            }
+
+            this.dataStore.get('pencils').forEach(function(value, index, array) {
+                value.draw();
+            })
+            this.dataStore.get('land').draw();
+            this.dataStore.get('birds').draw();
+
+            let timer = requestAnimationFrame(() => {
+                this.run()
+            });
+            this.dataStore.put('timer', timer)
+        } else {
+            cancelAnimationFrame(this.dataStore.get('timer'));
+            this.dataStore.destroy();
+        }
     }
 }
