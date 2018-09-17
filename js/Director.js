@@ -56,7 +56,7 @@ export class Director {
                 right: item.x + item.width
             }
 
-            if (birdsBorder.top > pencilBorder.bottom || birdsBorder.bottom < pencilBorder.top || birdsBorder.left > pencilBorder.right || birdsBorder.right < pencilBorder.left) {
+            if (birdsBorder.top >= pencilBorder.bottom || birdsBorder.bottom <= pencilBorder.top || birdsBorder.left >= pencilBorder.right || birdsBorder.right <= pencilBorder.left) {
 
 
             } else {
@@ -93,14 +93,15 @@ export class Director {
             })
             this.dataStore.get('land').draw();
             this.dataStore.get('birds').draw();
+            this.dataStore.get('score').draw();
 
             let timer = requestAnimationFrame(() => {
                 this.run()
             });
             this.dataStore.put('timer', timer)
         } else {
-        	console.log(this.dataStore.get('startButton'))
-        	console.log(StartButton)
+        	// console.log(this.dataStore.get('startButton'))
+        	// console.log(StartButton)
         	this.dataStore.get('startButton').draw();
             cancelAnimationFrame(this.dataStore.get('timer'));
             this.dataStore.destroy();

@@ -4,7 +4,8 @@ import {DataStore} from './js/base/DataStore.js';
 import {Land} from "./js/runtime/Land.js";
 import {Birds} from "./js/player/Birds.js";
 import {StartButton} from "./js/player/StartButton.js";
-import {Director} from './js/Director.js'
+import {Director} from './js/Director.js';
+import {Score} from './js/player/Score.js'
 export class Main{
 	constructor() {
 		// console.log('我的游戏');
@@ -35,6 +36,7 @@ export class Main{
 			.put('background', BackGround)
 			.put('birds',Birds)
 			.put('startButton',StartButton)
+			.put('score',Score)
 			.put('land',Land);
 		// console.log(Director);
 		this.registerEvent();
@@ -45,7 +47,7 @@ export class Main{
 	registerEvent(){
 		this.canvas.addEventListener('touchstart', e => {
 			e.preventDefault();
-			console.log(this);
+			// console.log(this);
 			if(this.director.isGameOver){
 				this.init();
 			}else{
