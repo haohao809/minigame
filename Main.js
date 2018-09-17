@@ -10,7 +10,7 @@ export class Main{
 	constructor() {
 		// console.log('我的游戏');
 		// new ResourceLoader();
-		this.canvas = document.getElementById('game_canvas');
+		this.canvas = wx.createCanvas();
 		this.ctx = this.canvas.getContext('2d');
 		this.dataStore = DataStore.getInstance();
 		this.director = Director.getInstance();
@@ -23,6 +23,7 @@ export class Main{
 		console.log(map);
 		this.dataStore.ctx = this.ctx;
 		this.dataStore.res = map;
+		this.dataStore.canvas = this.canvas;
 		// let background = new BackGround(this.ctx,map.get('background'));
 		// background.draw();
 		this.init();
@@ -33,7 +34,7 @@ export class Main{
 
 		this.dataStore
 			.put('pencils',[])
-			.put('background', BackGround)
+			.put('background',BackGround)
 			.put('birds',Birds)
 			.put('startButton',StartButton)
 			.put('score',Score)

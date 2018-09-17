@@ -1,5 +1,5 @@
 import {Pencil} from './Pencil.js'
-import {Sprite} from '../base/Sprite.js '
+import {Sprite} from '../base/Sprite.js'
 export class DownPencil extends Pencil{
 	constructor(top){
 		const image = Sprite.getImage('pencilDown');
@@ -7,7 +7,7 @@ export class DownPencil extends Pencil{
 	}
 
 	draw() {
-		let gap = window.innerHeight / 5;
+		let gap = this.dataStore.canvas.height / 5;
 		this.y = this.top + gap;
 		super.draw();
 	}

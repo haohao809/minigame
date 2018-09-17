@@ -18,8 +18,8 @@ export class Director {
         return Director.instance;
     }
     createPencil() {
-        const minTop = window.innerHeight / 8;
-        const maxTop = window.innerHeight / 2;
+        const minTop = this.dataStore.canvas.width / 8;
+        const maxTop = this.dataStore.canvas.height / 2;
         const top = minTop + Math.random() * (maxTop - minTop);
         this.dataStore.get('pencils').push(new UpPencil(top));
         this.dataStore.get('pencils').push(new DownPencil(top));
@@ -94,7 +94,7 @@ export class Director {
                 this.dataStore.get('score').isScore = true;
             }
 
-            if (pencils[0].x <= (window.innerWidth - pencils[0].width) / 2 && pencils.length === 2) {
+            if (pencils[0].x <= (this.dataStore.canvas.width - pencils[0].width) / 2 && pencils.length === 2) {
                 // console.log(pencils[0].x);
                 // console.log(window.innerWidth);
                 this.createPencil();

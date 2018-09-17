@@ -3,6 +3,7 @@ import {DataStore} from '../base/DataStore.js'
 export class Birds extends Sprite{
 	constructor() {
 		const image = Sprite.getImage('birds');
+		const dataStore = DataStore.getInstance();
 		super(image,
 			0,0,
 			image.width,image.height,
@@ -16,9 +17,9 @@ export class Birds extends Sprite{
         this.clippingWidth = [34,34,34];
         this.clippingHeight = [24,24,24];
 
-        this.birdX = window.innerWidth / 4;
+        this.birdX = dataStore.canvas.width / 4;
         this.birdsX = [this.birdX,this.birdX,this.birdX];
-        this.birdY = window.innerHeight / 2;
+        this.birdY = dataStore.canvas.height / 2;
         this.birdsY = [this.birdY,this.birdY,this.birdY];
 
         this.birdWidth = 34;
