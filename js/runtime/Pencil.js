@@ -5,7 +5,7 @@ export class Pencil extends Sprite{
 			super(image,
 				0,0,
 				image.width,image.height,
-				window.innerWidth,0,
+				DataStore.getInstance().canvas.width,0,
 				image.width, image.height); 
 			this.top = top;
 			this.moveSpeed = 2;
