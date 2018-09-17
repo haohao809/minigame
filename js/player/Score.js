@@ -1,11 +1,12 @@
-import DataStore from '../base/DataStore.js'
+import {DataStore} from '../base/DataStore.js'
 
 export class Score {
     constructor() {
-        const ctx = DataStore.getInstance().ctx;
-        const scoreNumber = 0;
+        this.ctx = DataStore.getInstance().ctx;
+        this.scoreNumber = 0;
     }
     draw() {
+        console.log(this.ctx);
         this.ctx.font = '25px Arial';
         this.ctx.fillStyle = '#ffcbeb';
         this.ctx.fillText(
