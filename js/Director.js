@@ -3,6 +3,7 @@ import { UpPencil } from './runtime/UpPencil.js';
 import { DownPencil } from './runtime/DownPencil.js';
 import { Birds } from './player/Birds.js';
 import { StartButton } from './player/StartButton.js';
+import {Score} from './player/Score.js'
 export class Director {
     constructor() {
         console.log('构造器初始化');
@@ -35,6 +36,7 @@ export class Director {
         const land = this.dataStore.get('land');
         const birds = this.dataStore.get('birds');
         const pencils = this.dataStore.get('pencils');
+        const score = this.dataStore.get('score');
         if (birds.birdsY[0] + birds.birdsHeight[0] >= land.y) {
             this.isGameOver = true;
             console.log('游戏结束')
@@ -65,6 +67,14 @@ export class Director {
 
             }
         })
+        // console.log('birdsBorderleft' ,birdsBorder.left);
+        // console.log('birdsX', birds.birdsX[0]);
+        // console.log('pencilsX',pencils[0].x);
+        // console.log('pencilsW',pencils[0].width);
+        if(birds.birdsX[0] > pencils[0].x + pencils[0].width && score.isScore){
+            score.isScore = false;
+            score.scoreNumber++;
+        }
 
     }
     run() {
@@ -80,6 +90,8 @@ export class Director {
 
                 pencils.shift();
                 pencils.shift();
+
+                this.dataStore.get('score').isScore = true;
             }
 
             if (pencils[0].x <= (window.innerWidth - pencils[0].width) / 2 && pencils.length === 2) {
@@ -96,7 +108,8 @@ export class Director {
             this.dataStore.get('score').draw();
 
             let timer = requestAnimationFrame(() => {
-                this.run()
+                this.run();
+
             });
             this.dataStore.put('timer', timer)
         } else {
