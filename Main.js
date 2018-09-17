@@ -46,8 +46,9 @@ export class Main{
 		this.director.run();
 	}
 	registerEvent(){
-		this.canvas.addEventListener('touchstart', e => {
-			e.preventDefault();
+		// this.canvas.addEventListener('touchstart', e => {
+			wx.onTouchStart( () => {
+			// e.preventDefault();
 			// console.log(this);
 			if(this.director.isGameOver){
 				this.init();
