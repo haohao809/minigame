@@ -6,11 +6,8 @@ export class StartButton extends Sprite{
 		const dataStore = DataStore.getInstance();
 		super(image,0,0,
 			image.width,image.height,
-			(dataStore.canvas.width - image.width)/2, (dataStore.canvas.height - image.height)/2,
+			(dataStore.canvas.width - image.width) / 2, (dataStore.canvas.height - image.height) / 2.5,
 			image.width, image.height)
-	}
-	clickEvent(){
-
 	}
 	// draw(){
 	// 	super.draw(this.img,

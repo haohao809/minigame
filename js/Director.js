@@ -3,7 +3,7 @@ import { UpPencil } from './runtime/UpPencil.js';
 import { DownPencil } from './runtime/DownPencil.js';
 import { Birds } from './player/Birds.js';
 import { StartButton } from './player/StartButton.js';
-import {Score} from './player/Score.js'
+import { Score } from './player/Score.js'
 export class Director {
     constructor() {
         console.log('构造器初始化');
@@ -71,9 +71,14 @@ export class Director {
         // console.log('birdsX', birds.birdsX[0]);
         // console.log('pencilsX',pencils[0].x);
         // console.log('pencilsW',pencils[0].width);
-        if(birds.birdsX[0] > pencils[0].x + pencils[0].width && score.isScore){
+        if (birds.birdsX[0] > pencils[0].x + pencils[0].width && score.isScore) {
             score.isScore = false;
             score.scoreNumber++;
+            wx.vibrateShort({
+                success: function(){
+                    console.log('震动成功')
+                }
+            })
         }
 
     }
@@ -113,11 +118,13 @@ export class Director {
             });
             this.dataStore.put('timer', timer)
         } else {
-        	// console.log(this.dataStore.get('startButton'))
-        	// console.log(StartButton)
-        	this.dataStore.get('startButton').draw();
+            // console.log(this.dataStore.get('startButton'))
+            // console.log(StartButton)
+            // this.dataStore.get('startButton').draw();
             cancelAnimationFrame(this.dataStore.get('timer'));
             this.dataStore.destroy();
+            //触发微信小游戏垃圾回收
+            wx.triggerGC();
         }
     }
 }

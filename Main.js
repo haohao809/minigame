@@ -19,6 +19,12 @@ export class Main{
 
 
 	}
+	createBgm(){
+		const bgm = wx.createInnerAudioContext()
+		bgm.autoplay = true
+		bgm.loop = true
+		bgm.src = './audio/bgm.mp3'
+	}
 	onResourceFirstLoaded(map) {
 		console.log(map);
 		this.dataStore.ctx = this.ctx;
@@ -26,6 +32,7 @@ export class Main{
 		this.dataStore.canvas = this.canvas;
 		// let background = new BackGround(this.ctx,map.get('background'));
 		// background.draw();
+		this.createBgm()
 		this.init();
 	}
 
